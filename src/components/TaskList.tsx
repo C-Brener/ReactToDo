@@ -14,7 +14,15 @@ export function TaskList() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [newTaskTitle, setNewTaskTitle] = useState('');
 
-  function handleCreateNewTask() {
+  function handleCreateNewTask(newTaskTilte:String) {
+    const data = {
+      id : new Date().getTime(),
+      title: newTaskTitle,
+      isComplete: false
+    }
+    if(newTaskTilte!=null){
+      setTasks(oldState=>[...oldState, data])
+    }
     // Crie uma nova task com um id random, não permita criar caso o título seja vazio.
   }
 
@@ -38,7 +46,7 @@ export function TaskList() {
             onChange={(e) => setNewTaskTitle(e.target.value)}
             value={newTaskTitle}
           />
-          <button type="submit" data-testid="add-task-button" onClick={handleCreateNewTask}>
+          <button type="submit" data-testid="add-task-button" onClick={()=>handleCreateNewTask(newTaskTitle)}>
             <FiCheckSquare size={16} color="#fff"/>
           </button>
         </div>
